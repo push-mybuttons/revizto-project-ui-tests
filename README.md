@@ -1,13 +1,13 @@
-# reqres-api-tests
+# revizto-project-ui-tests
 
-API autotests project based on [Reqres](https://reqres.in/).
+UI autotests for [Revizto](https://revizto.com/) landing.
 
 ## Stack
 - Java 17
 - Gradle
-- RestAssured
+- Selenide
+- Owner (configs)
 - JUnit 5
-- Lombok
 - Allure
 
 ## How to run
