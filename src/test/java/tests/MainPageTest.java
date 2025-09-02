@@ -68,9 +68,6 @@ public class MainPageTest extends BaseTest {
         mainPage.openPage();
         mainPage.getCompanyMenu().shouldBe(visible);
         mainPage.hoverCompanyMenu();
-        
-        sleep(1000);
-        
         mainPage.getCareersMenuItem().shouldBe(visible);
         mainPage.clickCareersMenuItem();
 
