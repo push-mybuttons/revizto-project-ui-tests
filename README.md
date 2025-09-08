@@ -11,5 +11,6 @@ UI autotests for [Revizto](https://revizto.com/) landing.
 - Allure
 
 ## How to run
-```bash```
+```bash
 gradle clean test
+```

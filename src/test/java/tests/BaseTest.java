@@ -11,11 +11,6 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 
 public class BaseTest {
 
-    // Экземпляры PageObject классов для переиспользования в тестах
-    // protected MainPage mainPage = new MainPage();
-    // protected LoginPage loginPage = new LoginPage();
-    // protected DashboardPage dashboardPage = new DashboardPage();
-
     @BeforeAll
     public static void setUp() {
         Configuration.baseUrl = System.getProperty("baseUrl", "https://revizto.com/en/");
@@ -28,7 +23,7 @@ public class BaseTest {
             Configuration.remote = remote;
         }
         
-        Configuration.headless = false;
+        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 30000;
 

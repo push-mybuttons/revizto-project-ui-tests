@@ -8,9 +8,9 @@ import pages.MainPage;
 import pages.DemoRequestPage;
 import pages.SolutionsPage;
 import pages.CareersPage;
+import pages.SubscribePage;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.Selenide.webdriver;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,6 +23,7 @@ public class MainPageTest extends BaseTest {
     private final DemoRequestPage demoRequestPage = new DemoRequestPage();
     private final SolutionsPage solutionsPage = new SolutionsPage();
     private final CareersPage careersPage = new CareersPage();
+    private final SubscribePage subscribePage = new SubscribePage();
 
 
     @Test
@@ -74,6 +75,23 @@ public class MainPageTest extends BaseTest {
         assertTrue(webdriver().driver().url().contains("/careers/"), 
             "URL должен содержать '/careers/'");
         careersPage.getPageTitle().shouldBe(visible);
+    }
+
+    @Test
+    @Story("Subscribe button should be clickable and redirect")
+    @DisplayName("Subscribe button should be clickable and redirect")
+    @Owner("MariiaP")
+    @Severity(SeverityLevel.CRITICAL)
+    @Tag("SubscribeButtonTest")
+    void subscribeButtonShouldBeClickable() {
+        mainPage.openPage();
+        mainPage.getSubscribeButton().shouldBe(visible);
+        mainPage.clickSubscribeButton();
+
+        assertTrue(webdriver().driver().url().contains("/subscribe-to-revizto-reporter/"), 
+            "URL должен содержать '/subscribe-to-revizto-reporter/'");
+        subscribePage.getPageTitle().shouldBe(visible);
+        
     }
 
 }

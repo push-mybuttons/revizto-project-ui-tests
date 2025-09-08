@@ -13,7 +13,8 @@ public class MainPage {
                                   headerRequestDemoButton = $x("//header//a[contains(text(), 'Request a Demo')]"),
                                   mainRequestDemoButton = $x("//section[contains(@class, 'hero')]//a[contains(text(), 'Request a Demo')]"),
                                   headerLogo = $("header .logo img, header img[alt*='Revizto']"),
-                                  mainTitle = $("section[class*='hero'] h1");
+                                  mainTitle = $("section[class*='hero'] h1"),
+                                  subscribeButton = $x("//footer//a[contains(text(), 'Subscribe')]");
     
     // Навигационное меню
     private final SelenideElement solutionsMenu = $("#menu-item-7298"),
@@ -54,6 +55,7 @@ public class MainPage {
     public void clickSignInButton() { signInButton.click(); }
     public void clickHeaderRequestDemoButton() { headerRequestDemoButton.click(); }
     public void clickMainRequestDemoButton() { mainRequestDemoButton.click(); }
+    public void clickSubscribeButton() { subscribeButton.click(); }
 
     // Навигация по главному меню
     public void hoverSolutionsMenu() { solutionsMenu.hover(); }
@@ -94,11 +96,9 @@ public class MainPage {
     public SelenideElement getSolutionsMenu() { return solutionsMenu; }
     public SelenideElement getCompanyMenu() { return companyMenu; }
     public SelenideElement getCareersMenuItem() { return careersMenuItem; }
+    public SelenideElement getSubscribeButton() { return subscribeButton; }
     public ElementsCollection getNewsArticles() { return newsArticles; }
     public SelenideElement getNewsletterEmailInput() { return newsletterEmailInput; }
     public SelenideElement getNewsletterSubmitButton() { return newsletterSubmitButton; }
 
-    // Приватные методы (используются только внутри класса)
-    private void waitForPageLoad() { headerLogo.shouldBe(visible); }
-    private boolean isDropdownMenuVisible(SelenideElement menu) { return menu.isDisplayed(); }
 }
