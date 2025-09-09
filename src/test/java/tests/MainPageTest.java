@@ -12,8 +12,8 @@ import pages.SubscribePage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.webdriver;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Assertions;
 
 @Epic("Main Page Functionality")
 @Feature("Main Page Navigation")
@@ -25,73 +25,84 @@ public class MainPageTest extends BaseTest {
     private final CareersPage careersPage = new CareersPage();
     private final SubscribePage subscribePage = new SubscribePage();
 
-
     @Test
-    @Story("Request Demo Button")
-    @DisplayName("Header Request Demo button should be clickable and redirect")
+    @Story("Demo request navigation")
+    @DisplayName("Header Request Demo button should redirect to demo page")
     @Owner("MariiaP")
     @Severity(SeverityLevel.CRITICAL)
     @Tag("RequestDemoTest")
-    void headerRequestDemoButtonShouldBeClickable() {
-        mainPage.openPage();
-        mainPage.getHeaderLogo().shouldBe(visible);
-        mainPage.getHeaderRequestDemoButton().shouldBe(visible);
-        mainPage.clickHeaderRequestDemoButton();
+    void headerRequestDemoButtonShouldRedirectToDemoPage() {
+        mainPage.openPage()
+                .clickHeaderRequestDemoButton();
         
-        assertTrue(webdriver().driver().url().contains("/demo-request/"), 
-            "URL должен содержать '/demo-request/'");
+        verifyUrlContains("/demo-request/");
         demoRequestPage.getFormBox().shouldBe(visible);
     }
 
     @Test
-    @Story("Navigation menu should be clickable and redirect")
+    @Story("Solutions navigation")
+    @DisplayName("Solutions menu should redirect to solutions page")
     @Owner("MariiaP")
     @Severity(SeverityLevel.CRITICAL)
     @Tag("SolutionsMenuTest")
-    @DisplayName("Solutions Menu should be clickable and redirect")
-    void solutionsMenuShouldBeClickable() {
-        mainPage.openPage();
-        mainPage.getSolutionsMenu().shouldBe(visible);
-        mainPage.clickSolutionsMenu();
+    void solutionsMenuShouldRedirectToSolutionsPage() {
+        mainPage.openPage()
+                .clickSolutionsMenu();
         
-        assertTrue(webdriver().driver().url().contains("/solutions/"), 
-            "URL должен содержать '/solutions/'");
+        verifyUrlContains("/solutions/");
         solutionsPage.getSolutionsMenu().shouldBe(visible);
     }
 
     @Test
-    @Story("Navigation menu should be clickable and redirect")
-    @DisplayName("Careers Menu should be clickable and redirect")
+    @Story("Company navigation")
+    @DisplayName("Careers menu should redirect to careers page")
     @Owner("MariiaP")
     @Severity(SeverityLevel.CRITICAL)
     @Tag("CareersMenuTest")
-    void careersMenuShouldBeClickable() {
-        mainPage.openPage();
-        mainPage.getCompanyMenu().shouldBe(visible);
-        mainPage.hoverCompanyMenu();
-        mainPage.getCareersMenuItem().shouldBe(visible);
-        mainPage.clickCareersMenuItem();
+    void careersMenuShouldRedirectToCareersPage() {
+        mainPage.openPage()
+                .hoverCompanyMenu()
+                .clickCareersMenuItem();
 
-        assertTrue(webdriver().driver().url().contains("/careers/"), 
-            "URL должен содержать '/careers/'");
+        verifyUrlContains("/careers/");
         careersPage.getPageTitle().shouldBe(visible);
     }
 
     @Test
-    @Story("Subscribe button should be clickable and redirect")
-    @DisplayName("Subscribe button should be clickable and redirect")
+    @Story("Newsletter subscription navigation")
+    @DisplayName("Subscribe button should redirect to subscription page")
     @Owner("MariiaP")
     @Severity(SeverityLevel.CRITICAL)
     @Tag("SubscribeButtonTest")
-    void subscribeButtonShouldBeClickable() {
-        mainPage.openPage();
-        mainPage.getSubscribeButton().shouldBe(visible);
-        mainPage.clickSubscribeButton();
+    void subscribeButtonShouldRedirectToSubscriptionPage() {
+        mainPage.openPage()
+                .clickSubscribeButton();
 
-        assertTrue(webdriver().driver().url().contains("/subscribe-to-revizto-reporter/"), 
-            "URL должен содержать '/subscribe-to-revizto-reporter/'");
+        verifyUrlContains("/subscribe-to-revizto-reporter/");
         subscribePage.getPageTitle().shouldBe(visible);
-        
     }
 
+    @Test
+    @Story("News and media functionality")
+    @DisplayName("News and media slides should be switchable")
+    @Owner("MariiaP")
+    @Severity(SeverityLevel.NORMAL)
+    @Tag("NewsAndMediaTest")
+    void newsAndMediaSlidesShouldBeSwitchable() {
+        mainPage.openPage()
+                .scrollToNewsMediaSection();
+        
+        String titleBefore = mainPage.getFirstVisibleCardKey();
+
+        mainPage.clickPreviousNewsButton();
+        String titleAfter = mainPage.getFirstVisibleCardKey();
+        
+        Assertions.assertNotEquals(titleBefore, titleAfter, 
+                                  "News slide should change after clicking Previous button");
+    }
+
+    private void verifyUrlContains(String expectedPath) {
+        assertTrue(webdriver().driver().url().contains(expectedPath), 
+                   "URL should contain: " + expectedPath);
+    }
 }

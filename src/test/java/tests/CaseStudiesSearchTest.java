@@ -1,0 +1,55 @@
+package tests;
+
+import io.qameta.allure.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import pages.CaseStudiesPage;
+import helpers.TestData;
+
+import static com.codeborne.selenide.Condition.visible;
+
+@Epic("Case Studies Functionality")
+@Feature("Case Studies Search")
+public class CaseStudiesSearchTest extends BaseTest {
+
+    private final CaseStudiesPage caseStudiesPage = new CaseStudiesPage();
+
+    @ParameterizedTest(name = "Поиск по запросу: {0}")
+    @Story("Parametrized search functionality") 
+    @DisplayName("Search with different queries")
+    @Owner("MariiaP")
+    @Severity(SeverityLevel.NORMAL)
+    @Tag("ParametrizedSearchTest")
+    @CsvSource({
+        "kiwi, 'Поиск по частичному названию компании'",
+        "construction, 'Поиск по construction'", 
+        "architecture, 'Поиск по architecture'"
+    })
+    void searchWithDifferentQueries(String searchQuery, String description) {
+        caseStudiesPage.openPage()
+                      .enterSearchQuery(searchQuery)
+                      .clickSearchButton()
+                      .verifySearchResultsForQuery(searchQuery);
+        
+        caseStudiesPage.getSearchResults().shouldBe(visible);
+    }
+
+    @Test
+    @Story("Negative search functionality")
+    @DisplayName("Search with negative query should return no results message")
+    @Owner("MariiaP")
+    @Severity(SeverityLevel.NORMAL)
+    @Tag("NegativeSearchTest")
+    void searchWithNegativeQueryShouldReturnNoResults() {
+        String searchQuery = TestData.getNegativeSearchQuery();
+        
+        caseStudiesPage.openPage()
+                      .enterSearchQuery(searchQuery)
+                      .clickSearchButton();
+        
+        caseStudiesPage.verifyNoSearchResults(searchQuery);
+    }
+}

@@ -1,48 +1,40 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-
+import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.*;
 
 public class SolutionsPage {
 
-    // Основные элементы страницы Solutions
+    public static final String SOLUTIONS_URL = "https://revizto.com/en/solutions/";
+
     private final SelenideElement solutionsMenu = $x("//nav//a[contains(text(), 'Solutions')] | //h1[contains(text(), 'Solutions')]"),
                                   pageTitle = $("h1"),
                                   architectsLink = $x("//a[contains(text(), 'Architects')]"),
                                   engineersLink = $x("//a[contains(text(), 'Engineers')]");
 
-    // URL страницы
-    public static final String SOLUTIONS_URL = "https://revizto.com/en/solutions/";
-
-    // Методы для проверок (возвращают элементы для assertions)
-    public SelenideElement getSolutionsMenu() { 
-        return solutionsMenu; 
-    }
-    
-    public SelenideElement getPageTitle() { 
-        return pageTitle; 
-    }
-    
-    public SelenideElement getArchitectsLink() { 
-        return architectsLink; 
-    }
-    
-    public SelenideElement getEngineersLink() { 
-        return engineersLink; 
-    }
-
-    // Методы для взаимодействия со страницей
+    @Step("Открыть страницу решений")
     public SolutionsPage openPage() {
         open(SOLUTIONS_URL);
+        pageTitle.shouldBe(visible);
         return this;
     }
 
-    public void clickArchitectsLink() { 
-        architectsLink.click(); 
+    @Step("Нажать на ссылку Architects")
+    public SolutionsPage clickArchitectsLink() {
+        architectsLink.shouldBe(visible).click();
+        return this;
     }
-    
-    public void clickEngineersLink() { 
-        engineersLink.click(); 
+
+    @Step("Нажать на ссылку Engineers")
+    public SolutionsPage clickEngineersLink() {
+        engineersLink.shouldBe(visible).click();
+        return this;
     }
+
+    public SelenideElement getSolutionsMenu() { return solutionsMenu; }
+    public SelenideElement getPageTitle() { return pageTitle; }
+    public SelenideElement getArchitectsLink() { return architectsLink; }
+    public SelenideElement getEngineersLink() { return engineersLink; }
 }

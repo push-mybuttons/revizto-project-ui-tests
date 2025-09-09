@@ -5,33 +5,32 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.SubscribePage;
+import helpers.TestData;
 
-import static com.codeborne.selenide.Selenide.webdriver;
+import static com.codeborne.selenide.Condition.visible;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+@Epic("Subscription Functionality")
+@Feature("Newsletter Subscription")
 public class SubscribePageTest extends BaseTest {
 
     private final SubscribePage subscribePage = new SubscribePage();
 
     @Test
-    @Story("Subscribing should be possible")
-    @DisplayName("Subscribing should be possible")
+    @Story("Newsletter subscription flow")
+    @DisplayName("User should be able to subscribe to newsletter")
     @Owner("MariiaP")
     @Severity(SeverityLevel.CRITICAL)
     @Tag("SubscribeFormTest")
-    void subscribeFormShouldBeVisible() {
-        subscribePage.openPage();
-        subscribePage.waitForFormLoad();
-        subscribePage.enterEmail("test@test.com");
-        subscribePage.enterFirstName("test");
-        subscribePage.enterLastName("test");
-        subscribePage.selectCountry("United States");
-        subscribePage.selectStateIfPresent("California");
-        subscribePage.clickSubscribeButton();
-        assertTrue(webdriver().driver().url().contains("/thank-you-for-subscribing/"), 
-            "URL должен содержать '/thank-you-for-subscribing/'");
-        subscribePage.waitForThankYouPage();
-        subscribePage.getThankYouPageTitle();
+    void userShouldBeAbleToSubscribeToNewsletter() {
+        subscribePage.openPage()
+                     .enterEmail(TestData.generateEmail())
+                     .enterFirstName(TestData.getFirstName())
+                     .enterLastName(TestData.getLastName())
+                     .selectCountry(TestData.getCountry())
+                     .selectStateIfPresent(TestData.getState())
+                     .clickSubscribeButton()
+                     .waitForThankYouPage();
+                     
+        subscribePage.getThankYouPageTitle().shouldBe(visible);
     }
 }
