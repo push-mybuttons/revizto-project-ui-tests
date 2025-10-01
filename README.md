@@ -112,6 +112,9 @@
 ./gradlew allureServe
 ```
 
+<img width="1511" height="861" alt="image" src="https://github.com/user-attachments/assets/6cc2d0ab-d349-46b7-aa2f-fd5447c4c00d" />
+
+
 ### Структура отчетов
 - **Epic**: группировка по основным функциональным областям
 - **Feature**: группировка по конкретным возможностям
