@@ -1,70 +1,44 @@
 package helpers;
 
+import com.github.javafaker.Faker;
 import lombok.experimental.UtilityClass;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import io.qameta.allure.Step;
+import java.util.Locale;
 
 @UtilityClass 
 public class TestData {
     
-    private static final Random random = new Random();
-    
+
+    private static final Faker faker = new Faker(new Locale("en-US"));
+        
+    @Step("Сгенерировать email")
     public static String generateEmail() {
-        return "test" + System.currentTimeMillis() + "@example.com";
+        return faker.internet().emailAddress();
     }
     
-    public static String generateRandomEmail() {
-        String[] domains = {"example.com", "test.com", "mail.com", "demo.org"};
-        String domain = domains[random.nextInt(domains.length)];
-        return "user" + random.nextInt(9999) + "@" + domain;
-    }
-    
+    @Step("Получить имя")
     public static String getFirstName() {
-        return "AutoTest";
+        return faker.name().firstName();
     }
     
+    @Step("Получить фамилию")
     public static String getLastName() {
-        return "User";
+        return faker.name().lastName();
     }
     
-    public static String getRandomFirstName() {
-        List<String> names = Arrays.asList("John", "Jane", "Alex", "Emma", "Mike", "Sarah");
-        return names.get(random.nextInt(names.size()));
-    }
-    
-    public static String getRandomLastName() {
-        List<String> surnames = Arrays.asList("Smith", "Johnson", "Brown", "Davis", "Wilson", "Taylor");
-        return surnames.get(random.nextInt(surnames.size()));
-    }
-    
+    @Step("Получить страну")
     public static String getCountry() {
-        return "United States";
+        return faker.address().country();
     }
     
+    @Step("Получить штат")
     public static String getState() {
-        return "California";
+        return faker.address().state();
     }
-
-    public static String getSearchQuery() {
-        return "kiwi";
-    }
-
+    
+    @Step("Получить негативный поисковый запрос")
     public static String getNegativeSearchQuery() {
-        return "lorem ipsum";
+        return faker.lorem().sentence(faker.random().nextInt(3, 5));
     }
     
-    public static List<String> getValidSearchQueries() {
-        return Arrays.asList("kiwi", "construction", "architecture", "building", "design");
-    }
-    
-    public static List<String> getInvalidSearchQueries() {
-        return Arrays.asList("qwerty123", "xyzabc", "lorem ipsum dolor");
-    }
-    
-    public static String getRandomValidSearchQuery() {
-        List<String> queries = getValidSearchQueries();
-        return queries.get(random.nextInt(queries.size()));
-    }
 }

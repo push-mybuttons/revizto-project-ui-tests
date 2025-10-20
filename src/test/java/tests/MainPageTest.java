@@ -10,7 +10,6 @@ import pages.SolutionsPage;
 import pages.CareersPage;
 import pages.SubscribePage;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Assertions;
@@ -25,6 +24,7 @@ public class MainPageTest extends BaseTest {
     private final CareersPage careersPage = new CareersPage();
     private final SubscribePage subscribePage = new SubscribePage();
 
+
     @Test
     @Story("Demo request navigation")
     @DisplayName("Header Request Demo button should redirect to demo page")
@@ -33,10 +33,11 @@ public class MainPageTest extends BaseTest {
     @Tag("RequestDemoTest")
     void headerRequestDemoButtonShouldRedirectToDemoPage() {
         mainPage.openPage()
-                .clickHeaderRequestDemoButton();
+                .clickMainRequestDemoButton();
+
         
         verifyUrlContains("/demo-request/");
-        demoRequestPage.getFormBox().shouldBe(visible);
+        demoRequestPage.verifyFormBoxVisible();
     }
 
     @Test
@@ -50,7 +51,7 @@ public class MainPageTest extends BaseTest {
                 .clickSolutionsMenu();
         
         verifyUrlContains("/solutions/");
-        solutionsPage.getSolutionsMenu().shouldBe(visible);
+        solutionsPage.verifySolutionsMenuVisible();
     }
 
     @Test
@@ -65,7 +66,7 @@ public class MainPageTest extends BaseTest {
                 .clickCareersMenuItem();
 
         verifyUrlContains("/careers/");
-        careersPage.getPageTitle().shouldBe(visible);
+        careersPage.verifyPageTitleVisible();
     }
 
     @Test
@@ -79,7 +80,7 @@ public class MainPageTest extends BaseTest {
                 .clickSubscribeButton();
 
         verifyUrlContains("/subscribe-to-revizto-reporter/");
-        subscribePage.getPageTitle().shouldBe(visible);
+        subscribePage.verifyPageTitleVisible();
     }
 
     @Test

@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import pages.CaseStudiesPage;
 import helpers.TestData;
 
-import static com.codeborne.selenide.Condition.visible;
-
 @Epic("Case Studies Functionality")
 @Feature("Case Studies Search")
 public class CaseStudiesSearchTest extends BaseTest {
@@ -32,9 +30,8 @@ public class CaseStudiesSearchTest extends BaseTest {
         caseStudiesPage.openPage()
                       .enterSearchQuery(searchQuery)
                       .clickSearchButton()
-                      .verifySearchResultsForQuery(searchQuery);
-        
-        caseStudiesPage.getSearchResults().shouldBe(visible);
+                      .verifySearchResultsForQuery(searchQuery)
+                      .verifySearchResultsVisible();
     }
 
     @Test

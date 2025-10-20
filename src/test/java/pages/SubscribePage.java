@@ -5,9 +5,9 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
+
 public class SubscribePage {
 
-    public static final String SUBSCRIBE_URL = "https://revizto.com/en/subscribe-to-revizto-reporter/";
     private static final String EXPECTED_TITLE = "Stay tuned!";
     private static final String THANK_YOU_TITLE = "Thank You for Subscribing";
 
@@ -27,15 +27,16 @@ public class SubscribePage {
 
     @Step("Открыть страницу подписки")
     public SubscribePage openPage() {
-        open(SUBSCRIBE_URL);
+        open("/subscribe-to-revizto-reporter/");
         subscribeForm.shouldBe(visible);
         countryDropdown.shouldBe(visible, enabled);
         return this;
     }
 
-    @Step("Получить заголовок страницы")
-    public SelenideElement getPageTitle() {
-        return pageTitle.shouldBe(visible).shouldHave(text(EXPECTED_TITLE));
+    @Step("Проверить видимость заголовка страницы")
+    public SubscribePage verifyPageTitleVisible() {
+        pageTitle.shouldBe(visible).shouldHave(text(EXPECTED_TITLE));
+        return this;
     }
 
     @Step("Ввести email: {email}")
@@ -80,9 +81,10 @@ public class SubscribePage {
         return this;
     }
 
-    @Step("Получить заголовок страницы благодарности")
-    public SelenideElement getThankYouPageTitle() {
-        return thankYouPageTitle.shouldBe(visible).shouldHave(text(THANK_YOU_TITLE));
+    @Step("Проверить видимость заголовка страницы благодарности")
+    public SubscribePage verifyThankYouPageTitle() {
+        thankYouPageTitle.shouldBe(visible).shouldHave(text(THANK_YOU_TITLE));
+        return this;
     }
 
     @Step("Ждать страницу благодарности")

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import pages.SubscribePage;
 import helpers.TestData;
 
-import static com.codeborne.selenide.Condition.visible;
 
 @Epic("Subscription Functionality")
 @Feature("Newsletter Subscription")
@@ -29,8 +28,7 @@ public class SubscribePageTest extends BaseTest {
                      .selectCountry(TestData.getCountry())
                      .selectStateIfPresent(TestData.getState())
                      .clickSubscribeButton()
-                     .waitForThankYouPage();
-                     
-        subscribePage.getThankYouPageTitle().shouldBe(visible);
+                     .waitForThankYouPage()
+                     .verifyThankYouPageTitle();
     }
 }

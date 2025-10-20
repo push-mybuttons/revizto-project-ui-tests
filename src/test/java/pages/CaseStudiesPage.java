@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.*;
 
 public class CaseStudiesPage {
     
-    public static final String CASE_STUDIES_URL = "https://revizto.com/en/resources/case-studies/";
+    //public static final String CASE_STUDIES_URL = "https://revizto.com/en/resources/case-studies/";
 
     private final SelenideElement caseStudiesPageTitle = $("h1.section-title"),
                                   searchInput = $("input.resources-search"),
@@ -18,7 +18,7 @@ public class CaseStudiesPage {
 
     @Step("Открыть страницу Case Studies")
     public CaseStudiesPage openPage() {
-        open(CASE_STUDIES_URL);
+        open("/resources/case-studies/");   
         caseStudiesPageTitle.shouldBe(visible);
         return this;
     }
@@ -37,11 +37,11 @@ public class CaseStudiesPage {
         return this;
     }
     
-    @Step("Получить результаты поиска")
-    public SelenideElement getSearchResults() {
+    @Step("Проверить видимость результатов поиска")
+    public CaseStudiesPage verifySearchResultsVisible() {
         searchResultsTitle.shouldBe(visible);
         searchResults.shouldBe(visible);
-        return searchResults;
+        return this;
     }
 
     @Step("Проверить результаты поиска для запроса: {expectedQuery}")

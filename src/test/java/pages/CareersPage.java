@@ -2,23 +2,16 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.*;   
 
 public class CareersPage {
 
-    public static final String CAREERS_URL = "https://revizto.com/en/careers/";
+    private final SelenideElement pageTitle = $("h1");
 
-    private final SelenideElement careersMenu = $x("//nav//a[contains(text(), 'Careers')] | //h1[contains(text(), 'Careers')]"),
-                                  pageTitle = $("h1");
-
-    @Step("Открыть страницу карьеры")
-    public CareersPage openPage() {
-        open(CAREERS_URL);
+    @Step("Проверить видимость заголовка страницы")
+    public CareersPage verifyPageTitleVisible() {
         pageTitle.shouldBe(visible);
         return this;
     }
-
-    public SelenideElement getCareersMenu() { return careersMenu; }
-    public SelenideElement getPageTitle() { return pageTitle; }
 }
