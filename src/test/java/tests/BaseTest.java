@@ -7,10 +7,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import io.qameta.allure.selenide.AllureSelenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class BaseTest {
@@ -24,17 +20,6 @@ public class BaseTest {
         Configuration.pageLoadTimeout = 30000;
         
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-        
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", "chrome");
-        capabilities.setCapability("browserVersion", "120.0");
-        
-        Map<String, Object> selenoidOptions = new HashMap<>();
-        selenoidOptions.put("enableVNC", true);
-        selenoidOptions.put("enableVideo", false);
-        capabilities.setCapability("selenoid:options", selenoidOptions);
-        
-        Configuration.browserCapabilities = capabilities;
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
