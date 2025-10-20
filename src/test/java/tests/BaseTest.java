@@ -21,6 +21,7 @@ public class BaseTest {
         Configuration.pageLoadTimeout = 30000;
         
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.browserVersion = "128.0";
         
         ChromeOptions options = new ChromeOptions();
         options.setCapability("selenoid:options", new java.util.HashMap<String, Object>() {{
