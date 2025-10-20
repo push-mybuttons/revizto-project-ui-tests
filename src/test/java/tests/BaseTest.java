@@ -28,9 +28,7 @@ public class BaseTest {
             put("enableVNC", true);
             put("enableVideo", false);
         }});
-        
         Configuration.browserCapabilities = options;
-        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
