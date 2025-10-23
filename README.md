@@ -92,7 +92,7 @@
 ./gradlew test
 
 # Запуск с параметрами
-./gradlew test -Dbrowser=chrome -DbrowserSize=1920x1080 -Dheadless=false
+./gradlew test -Dbrowser=chrome -DbrowserSize=1920x1080 
 
 # Запуск конкретного класса
 ./gradlew test --tests MainPageTest
