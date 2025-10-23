@@ -22,6 +22,8 @@ Thumbs.db
 
 # Allure reports
 allure-results/
+allure-report/
+.allure/
 
 # Other
 *.swp
