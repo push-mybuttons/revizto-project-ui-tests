@@ -15,16 +15,16 @@ public class CaseStudiesSearchTest extends BaseTest {
 
     private final CaseStudiesPage caseStudiesPage = new CaseStudiesPage();
 
-    @ParameterizedTest(name = "Поиск по запросу: {0}")
+    @ParameterizedTest(name = "Search by query: {0}")
     @Story("Parametrized search functionality") 
     @DisplayName("Search with different queries")
     @Owner("MariiaP")
     @Severity(SeverityLevel.NORMAL)
     @Tag("ParametrizedSearchTest")
     @CsvSource({
-        "kiwi, 'Поиск по частичному названию компании'",
-        "construction, 'Поиск по construction'", 
-        "architecture, 'Поиск по architecture'"
+        "kiwi, 'Search by partial company name'",
+        "construction, 'Search by construction'", 
+        "architecture, 'Search by architecture'"
     })
     void searchWithDifferentQueries(String searchQuery, String description) {
         caseStudiesPage.openPage()
