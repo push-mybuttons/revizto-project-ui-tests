@@ -22,14 +22,18 @@ public class BaseTest {
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 30000;
         
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        boolean isLocal = Boolean.parseBoolean(System.getProperty("local", "false"));
         
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", false
-        ));
-        Configuration.browserCapabilities = capabilities;
+        if (!isLocal) {
+            Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+            
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                    "enableVNC", true,
+                    "enableVideo", false
+            ));
+            Configuration.browserCapabilities = capabilities;
+        }
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
