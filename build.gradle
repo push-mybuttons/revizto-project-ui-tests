@@ -27,7 +27,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    systemProperties(System.getProperties()) 
+    systemProperties(System.getProperties())
+}
 
 allure {
     report {
@@ -38,7 +39,6 @@ allure {
         frameworks {
             junit5 {
                 adapterVersion.set("2.21.0")
-                }
             }
         }
     }
