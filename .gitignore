@@ -3,6 +3,9 @@
 *.iml
 out/
 
+# Visual Studio Code
+.vscode/
+
 # Gradle
 .gradle/
 build/

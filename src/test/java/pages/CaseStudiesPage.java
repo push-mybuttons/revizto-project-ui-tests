@@ -6,8 +6,6 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
 public class CaseStudiesPage {
-    
-    //public static final String CASE_STUDIES_URL = "https://revizto.com/en/resources/case-studies/";
 
     private final SelenideElement caseStudiesPageTitle = $("h1.section-title"),
                                   searchInput = $("input.resources-search"),
