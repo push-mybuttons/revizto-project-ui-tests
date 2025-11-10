@@ -1,13 +1,13 @@
 package helpers;
 
 import com.github.javafaker.Faker;
-import lombok.experimental.UtilityClass;
 import io.qameta.allure.Step;
 import java.util.Locale;
 
-@UtilityClass 
 public class TestData {
     
+    private TestData() {
+    }
 
     private static final Faker faker = new Faker(new Locale("en-US"));
         

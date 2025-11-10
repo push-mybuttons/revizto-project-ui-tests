@@ -9,6 +9,7 @@ out/
 # Gradle
 .gradle/
 build/
+gradle.properties
 
 # Java
 *.class

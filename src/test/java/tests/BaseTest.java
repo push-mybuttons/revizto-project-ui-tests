@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import helpers.Attach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import io.qameta.allure.selenide.AllureSelenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -25,7 +26,12 @@ public class BaseTest {
         boolean isLocal = Boolean.parseBoolean(System.getProperty("local", "false"));
         
         if (!isLocal) {
-            Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+            String selenoidUser = System.getProperty("selenoidUser");
+            String selenoidPassword = System.getProperty("selenoidPassword");
+            String selenoidUrl = System.getProperty("selenoidUrl", "selenoid.autotests.cloud/wd/hub");
+            
+            Configuration.remote = String.format("https://%s:%s@%s", 
+                    selenoidUser, selenoidPassword, selenoidUrl);
             
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -34,7 +40,10 @@ public class BaseTest {
             ));
             Configuration.browserCapabilities = capabilities;
         }
+    }
 
+    @BeforeEach
+    public void addListener() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
@@ -46,5 +55,6 @@ public class BaseTest {
         Attach.addVideo();
         
         Selenide.closeWebDriver();
+        SelenideLogger.removeListener("AllureSelenide");
     }
 }
