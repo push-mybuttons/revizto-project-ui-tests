@@ -14,7 +14,7 @@
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-original.svg" title="Gradle" alt="Gradle" width="40" height="40"/>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original-wordmark.svg" title="JUnit 5" alt="JUnit 5" width="40" height="40"/>      
 <img src="https://github.com/push-mybuttons/resources/blob/main/icons/Selenide.svg" title="Selenide" alt="Selenide" width="40" height="40"/>
-<img src="https://avatars.githubusercontent.com/u/5879054?s=200&v=4" title="Allure Report" alt="Allure Report" width="40" height="40"/>
+<img src="https://github.com/push-mybuttons/resources/blob/main/icons/Allure.png" title="Allure Report" alt="Allure Report" width="40" height="40"/>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" title="Jenkins" alt="Jenkins" width="40" height="40"/>
 </p>
 
